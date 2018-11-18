@@ -2,6 +2,7 @@
 <resources>
 
     <attr name="r_anim_check_succeed_ico" format="reference"/>
+    <attr name="r_anim_check_succeed_position_angle" format="float"/>
     <attr name="r_anim_check_succeed_offset_x" format="dimension"/>
     <attr name="r_anim_check_succeed_offset_y" format="dimension"/>
     <attr name="r_anim_check_status" format="enum">
@@ -21,6 +22,7 @@
     <declare-styleable name="AnimCheckView">
         <attr name="r_anim_check_succeed_ico"/>
         <attr name="r_anim_check_succeed_offset_x"/>
+        <attr name="r_anim_check_succeed_position_angle"/>
         <attr name="r_anim_check_succeed_offset_y"/>
         <attr name="r_anim_check_status"/>
         <attr name="r_anim_check_progress_width"/>
@@ -35,6 +37,7 @@
     <declare-styleable name="RDrawGradientProgress">
         <attr name="r_anim_check_succeed_ico"/>
         <attr name="r_anim_check_succeed_offset_x"/>
+        <attr name="r_anim_check_succeed_position_angle"/>
         <attr name="r_anim_check_succeed_offset_y"/>
         <attr name="r_anim_check_status"/>
         <attr name="r_anim_check_progress_width"/>

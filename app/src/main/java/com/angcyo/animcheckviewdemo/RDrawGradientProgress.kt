@@ -62,7 +62,7 @@ class RDrawGradientProgress(view: View, attributeSet: AttributeSet? = null) : Ba
             }
         }
 
-    /*距离微调, 相对于右下角的偏移*/
+    /*距离微调*/
     var succeedDrawableOffsetX = -2 * density().toInt()
         set(value) {
             field = value
@@ -71,6 +71,15 @@ class RDrawGradientProgress(view: View, attributeSet: AttributeSet? = null) : Ba
             }
         }
     var succeedDrawableOffsetY = -2 * density().toInt()
+        set(value) {
+            field = value
+            if (progressStatus == STATUS_SUCCEED) {
+                postInvalidateOnAnimation()
+            }
+        }
+
+    /*ico 在圆形进度条的角度位置(非弧度), 水平x轴右边为0度*/
+    var succeedDrawablePostionAngle = 45f
         set(value) {
             field = value
             if (progressStatus == STATUS_SUCCEED) {
@@ -121,6 +130,10 @@ class RDrawGradientProgress(view: View, attributeSet: AttributeSet? = null) : Ba
         succeedDrawableOffsetY = array.getDimensionPixelOffset(
             R.styleable.RDrawGradientProgress_r_anim_check_succeed_offset_y,
             succeedDrawableOffsetY
+        )
+        succeedDrawablePostionAngle = array.getFloat(
+            R.styleable.RDrawGradientProgress_r_anim_check_succeed_position_angle,
+            succeedDrawablePostionAngle
         )
         progressWidth = array.getDimensionPixelOffset(
             R.styleable.RDrawGradientProgress_r_anim_check_progress_width,
