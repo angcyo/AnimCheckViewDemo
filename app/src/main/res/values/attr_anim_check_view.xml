@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="r_anim_check_succeed_ico" format="reference"/>
+    <attr name="r_anim_check_succeed_offset_x" format="dimension"/>
+    <attr name="r_anim_check_succeed_offset_y" format="dimension"/>
+    <attr name="r_anim_check_status" format="enum">
+        <enum name="STATUS_NONE" value="0"/>
+        <enum name="STATUS_GRADIENT" value="1"/>
+        <enum name="STATUS_FINISH" value="2"/>
+        <enum name="STATUS_SUCCEED" value="3"/>
+    </attr>
+    <attr name="r_anim_check_progress_width" format="dimension"/>
+    <attr name="r_anim_check_draw_bg" format="boolean"/>
+    <attr name="r_anim_check_bg_color" format="color"/>
+    <attr name="r_anim_check_gradient_start_color" format="color"/>
+    <attr name="r_anim_check_gradient_end_color" format="color"/>
+    <attr name="r_anim_check_rotate_speed" format="integer"/>
+    <attr name="r_anim_check_start_angle" format="integer"/>
+
+    <declare-styleable name="AnimCheckView">
+        <attr name="r_anim_check_succeed_ico"/>
+        <attr name="r_anim_check_succeed_offset_x"/>
+        <attr name="r_anim_check_succeed_offset_y"/>
+        <attr name="r_anim_check_status"/>
+        <attr name="r_anim_check_progress_width"/>
+        <attr name="r_anim_check_draw_bg"/>
+        <attr name="r_anim_check_bg_color"/>
+        <attr name="r_anim_check_gradient_start_color"/>
+        <attr name="r_anim_check_gradient_end_color"/>
+        <attr name="r_anim_check_start_angle"/>
+        <attr name="r_anim_check_rotate_speed"/>
+    </declare-styleable>
+
+    <declare-styleable name="RDrawGradientProgress">
+        <attr name="r_anim_check_succeed_ico"/>
+        <attr name="r_anim_check_succeed_offset_x"/>
+        <attr name="r_anim_check_succeed_offset_y"/>
+        <attr name="r_anim_check_status"/>
+        <attr name="r_anim_check_progress_width"/>
+        <attr name="r_anim_check_draw_bg"/>
+        <attr name="r_anim_check_bg_color"/>
+        <attr name="r_anim_check_gradient_start_color"/>
+        <attr name="r_anim_check_gradient_end_color"/>
+        <attr name="r_anim_check_start_angle"/>
+        <attr name="r_anim_check_rotate_speed"/>
+    </declare-styleable>
+
+</resources>
