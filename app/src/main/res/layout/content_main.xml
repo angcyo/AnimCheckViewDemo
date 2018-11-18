@@ -71,8 +71,6 @@
                     app:r_anim_check_succeed_ico="@drawable/ico_succeed"
                     app:r_anim_check_status="STATUS_GRADIENT"
                     tools:r_anim_check_status="STATUS_SUCCEED"
-                    app:r_anim_check_succeed_offset_y="-16dp"
-                    app:r_anim_check_succeed_offset_x="-16dp"
                     android:layout_width="80dp"
                     android:layout_height="80dp"/>
 
@@ -119,8 +117,6 @@
                     android:id="@+id/rc1"
                     app:r_anim_check_start_angle="0"
                     android:padding="16dp"
-                    app:r_anim_check_succeed_offset_y="-16dp"
-                    app:r_anim_check_succeed_offset_x="-16dp"
                     app:r_anim_check_succeed_ico="@drawable/ico_succeed"
                     app:r_anim_check_status="STATUS_GRADIENT"
                     tools:r_anim_check_status="STATUS_SUCCEED"

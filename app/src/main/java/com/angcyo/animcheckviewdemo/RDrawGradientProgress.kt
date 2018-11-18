@@ -63,14 +63,14 @@ class RDrawGradientProgress(view: View, attributeSet: AttributeSet? = null) : Ba
         }
 
     /*距离微调*/
-    var succeedDrawableOffsetX = -2 * density().toInt()
+    var succeedDrawableOffsetX = 0
         set(value) {
             field = value
             if (progressStatus == STATUS_SUCCEED) {
                 postInvalidateOnAnimation()
             }
         }
-    var succeedDrawableOffsetY = -2 * density().toInt()
+    var succeedDrawableOffsetY = 0
         set(value) {
             field = value
             if (progressStatus == STATUS_SUCCEED) {
@@ -79,7 +79,7 @@ class RDrawGradientProgress(view: View, attributeSet: AttributeSet? = null) : Ba
         }
 
     /*ico 在圆形进度条的角度位置(非弧度), 水平x轴右边为0度*/
-    var succeedDrawablePostionAngle = 45f
+    var succeedDrawablePositionAngle = 45f
         set(value) {
             field = value
             if (progressStatus == STATUS_SUCCEED) {
@@ -131,9 +131,9 @@ class RDrawGradientProgress(view: View, attributeSet: AttributeSet? = null) : Ba
             R.styleable.RDrawGradientProgress_r_anim_check_succeed_offset_y,
             succeedDrawableOffsetY
         )
-        succeedDrawablePostionAngle = array.getFloat(
+        succeedDrawablePositionAngle = array.getFloat(
             R.styleable.RDrawGradientProgress_r_anim_check_succeed_position_angle,
-            succeedDrawablePostionAngle
+            succeedDrawablePositionAngle
         )
         progressWidth = array.getDimensionPixelOffset(
             R.styleable.RDrawGradientProgress_r_anim_check_progress_width,
@@ -162,7 +162,10 @@ class RDrawGradientProgress(view: View, attributeSet: AttributeSet? = null) : Ba
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
+        //束缚圆的正方形
         val maxDrawSquare = maxDrawSquareF()
+        //圆的半径
+        val cr = maxDrawSquare.width() / 2
 
         mBasePaint.strokeWidth = progressWidth
         mBasePaint.style = Paint.Style.STROKE
@@ -173,7 +176,7 @@ class RDrawGradientProgress(view: View, attributeSet: AttributeSet? = null) : Ba
 
             canvas.drawCircle(
                 maxDrawSquare.centerX(),
-                maxDrawSquare.centerY(), maxDrawSquare.width() / 2 - progressWidth / 2, mBasePaint
+                maxDrawSquare.centerY(), cr - progressWidth / 2, mBasePaint
             )
         }
 
@@ -184,7 +187,7 @@ class RDrawGradientProgress(view: View, attributeSet: AttributeSet? = null) : Ba
         } else if (progressStatus == STATUS_GRADIENT) {
             gradientRectF.set(
                 -maxDrawSquare.width() / 2, -maxDrawSquare.height() / 2,
-                maxDrawSquare.width() / 2, maxDrawSquare.height() / 2
+                cr, maxDrawSquare.height() / 2
             )
             canvas.save()
             canvas.translate(maxDrawSquare.centerX(), maxDrawSquare.centerY())
@@ -199,7 +202,7 @@ class RDrawGradientProgress(view: View, attributeSet: AttributeSet? = null) : Ba
 
             canvas.drawCircle(
                 maxDrawSquare.centerX(),
-                maxDrawSquare.centerY(), maxDrawSquare.width() / 2 - progressWidth / 2, mBasePaint
+                maxDrawSquare.centerY(), cr - progressWidth / 2, mBasePaint
             )
 
             if (progressStatus == STATUS_SUCCEED) {
@@ -210,13 +213,25 @@ class RDrawGradientProgress(view: View, attributeSet: AttributeSet? = null) : Ba
                     } else {
                         it.alpha = succeedDrawableAlpha
                     }
+
+                    //角度在圆上的坐标. 以圆心为坐标中点
+                    val radians = Math.toRadians(succeedDrawablePositionAngle.toDouble()) //角度转弧度
+                    val cx = Math.cos(radians) * (cr - progressWidth / 2) + succeedDrawableOffsetX
+                    val cy = Math.sin(radians) * (cr - progressWidth / 2) + succeedDrawableOffsetY
+
+                    canvas.save()
+                    canvas.translate(
+                        (maxDrawSquare.centerX() + cx).toFloat(),
+                        (maxDrawSquare.centerY() + cy).toFloat()
+                    )
                     it.setBounds(
-                        viewWidth - it.intrinsicWidth + succeedDrawableOffsetX,
-                        viewHeight - it.intrinsicHeight + succeedDrawableOffsetY,
-                        viewWidth + succeedDrawableOffsetX,
-                        viewHeight + succeedDrawableOffsetY
+                        -it.intrinsicWidth / 2,
+                        -it.intrinsicHeight / 2,
+                        it.intrinsicWidth / 2,
+                        it.intrinsicHeight / 2
                     )
                     it.draw(canvas)
+                    canvas.restore()
                     succeedDrawableAlpha += 10 //动画速率
                 }
             }
